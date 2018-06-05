@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.member.dao.MemberCurrentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.member.entity.MemberCurrentEntity" id="memberCurrentMap">
+        <result property="id" column="id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="currentQuestion" column="current_question"/>
+        <result property="currentDisease" column="current_disease"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="gmtCreate" column="gmt_create"/>
+    </resultMap>
+
+
+</mapper>

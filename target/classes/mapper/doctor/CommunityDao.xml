@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.doctor.dao.CommunityDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.doctor.entity.CommunityEntity" id="communityMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="communityManagerId" column="community_manager_id"/>
+        <result property="communityCode" column="community_code"/>
+        <result property="communityManagerName" column="community_manager_name"/>
+        <result property="communityManagerMobile" column="community_manager_mobile"/>
+        <result property="address" column="address"/>
+        <result property="mobile" column="mobile"/>
+        <result property="img" column="img"/>
+        <result property="status" column="status"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="gmtCreate" column="gmt_create"/>
+    </resultMap>
+
+
+</mapper>

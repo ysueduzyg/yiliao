@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.member.dao.MemberDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.member.entity.MemberEntity" id="memberMap">
+        <result property="id" column="id"/>
+        <result property="level" column="level"/>
+        <result property="mobile" column="mobile"/>
+        <result property="userId" column="user_id"/>
+        <result property="doctorId" column="doctor_id"/>
+        <result property="communityId" column="community_id"/>
+        <result property="enterpriseId" column="enterprise_id"/>
+        <result property="isCommunity" column="is_community"/>
+        <result property="isEnterprise" column="is_enterprise"/>
+        <result property="realName" column="real_name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="birthday" column="birthday"/>
+        <result property="birthdayType" column="birthday_type"/>
+        <result property="national" column="national"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <result property="education" column="education"/>
+        <result property="professional" column="professional"/>
+        <result property="income" column="income"/>
+        <result property="workAt" column="work_at"/>
+        <result property="dueTime" column="due_time"/>
+        <result property="blood" column="blood"/>
+        <result property="height" column="height"/>
+        <result property="weight" column="weight"/>
+        <result property="bloodPressure" column="blood_pressure"/>
+        <result property="bloodSugar" column="blood_sugar"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="gmtCreate" column="gmt_create"/>
+    </resultMap>
+
+
+    <select id="selectMembers" resultType="io.renren.modules.app.form.MemberListForm">
+        select
+                m.id ,
+                m.level AS `level` ,
+                m.user_id AS userId ,
+                m.doctor_id AS doctorId ,
+                d.`name` AS doctorName ,
+                m.community_id AS communityId ,
+                m.is_enterprise as isEnterprise,
+                m.is_community as isCommunity,
+                m.enterprise_id as enterpriseId,
+                (select name from tbl_enterprise where id = m.enterprise_id) as enterprseName,
+                d.community_name AS communityName ,
+                m.real_name AS realName ,
+                m.professional AS professional ,
+                m.id_card AS idCard ,
+                m.birthday AS birthday ,
+                m.birthday_type AS birthdayType ,
+                m.national AS `national` ,
+                m.sex AS sex ,
+                m.address AS address ,
+                m.education AS education ,
+                m.income AS income ,
+                m.work_at AS workAt ,
+                m.due_time AS dueTime ,
+                m.blood AS blood ,
+                m.height AS height ,
+                m.weight AS weight ,
+                m.blood_pressure AS bloodPressure ,
+                m.blood_sugar AS bloodSugar
+        from tbl_member m
+			LEFT JOIN tbl_doctor d on d.id = m.doctor_id where m.is_deleted = 0
+        <if test="search != null and search != ''">
+            AND (m.real_name like CONCAT('%',#{search},'%')
+        </if>
+        <if test="doctorId != null and doctorId != 0 ">
+            AND m.doctor_id = #{doctorId}
+        </if>
+        <if test="communityId != null and communityId != 0 ">
+            AND m.community_id = #{communityId}
+        </if>
+		 limit #{start} , #{end}
+    </select>
+
+
+</mapper>
